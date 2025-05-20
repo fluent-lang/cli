@@ -52,7 +52,13 @@ namespace fluent::cli
 
             // Print the flag info
             print_padding(key.data(), 15);
-            printf("%s", value->desc.data());
+            printf("--%s", value->desc.data());
+
+            // Print shortcuts
+            if (!value->shortcut.empty())
+            {
+                printf(", -%s", value->shortcut.data());
+            }
 
             // Print the flag metadata
             if (value->type == STRING)
