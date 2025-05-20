@@ -28,8 +28,8 @@ namespace fluent::cli
 {
     typedef struct
     {
-        ankerl::unordered_dense::map<std::string, bool> static_flags;
-        ankerl::unordered_dense::map<std::string, const char *> string_flags;
+        ankerl::unordered_dense::map<std::string, bool> statics;
+        ankerl::unordered_dense::map<std::string, const char *> strings;
         bool success = false;
     } Argv;
 
@@ -194,8 +194,8 @@ namespace fluent::cli
         }
 
         // Set the static & string flags
-        result->static_flags = static_flags;
-        result->string_flags = string_flags;
+        result->statics = static_flags;
+        result->strings = string_flags;
 
         return result;
     }
