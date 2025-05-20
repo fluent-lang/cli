@@ -37,9 +37,9 @@ namespace fluent::cli
         // version here, as this is supposed to happen on startup
         printf("%s", name);
         printf(" - ");
-        printf("%s", desc);
-        printf("");
-        printf("AVAILABLE FLAGS:");
+        printf("%s\n", desc);
+        puts("");
+        puts("AVAILABLE FLAGS:");
 
         // Iterate over the flags and print them all
         for (auto &[key, value] : flags)
