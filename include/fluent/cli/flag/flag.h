@@ -28,9 +28,9 @@ namespace fluent::cli
     typedef struct
     {
         FlagType type;
-        std::string_view original_name;
-        std::string_view desc;
-        std::string_view shortcut;
+        std::string original_name;
+        std::string desc;
+        std::string shortcut;
         bool required;
     } Flag;
 }

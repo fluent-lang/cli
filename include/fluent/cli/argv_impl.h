@@ -28,15 +28,15 @@ namespace fluent::cli
 {
     typedef struct
     {
-        ankerl::unordered_dense::map<std::string_view, bool> static_flags;
-        ankerl::unordered_dense::map<std::string_view, const char *> string_flags;
+        ankerl::unordered_dense::map<std::string, bool> static_flags;
+        ankerl::unordered_dense::map<std::string, const char *> string_flags;
         bool success = false;
     } Argv;
 
     inline std::shared_ptr<Argv> parse_argv(
         const int argc,
         const char **argv,
-        ankerl::unordered_dense::map<std::string_view, std::shared_ptr<Flag>> &flags
+        ankerl::unordered_dense::map<std::string, std::shared_ptr<Flag>> &flags
     )
     {
         // Create a result
@@ -51,7 +51,7 @@ namespace fluent::cli
         }
 
         // Insert all flags by shortcut
-        ankerl::unordered_dense::map<std::string_view, std::shared_ptr<Flag>> new_flags;
+        ankerl::unordered_dense::map<std::string, std::shared_ptr<Flag>> new_flags;
         for (auto &[key, value] : flags)
         {
             value->original_name = key;
@@ -67,8 +67,8 @@ namespace fluent::cli
         }
 
         // Create a HashMap for the static & string flags
-        ankerl::unordered_dense::map<std::string_view, bool> static_flags;
-        ankerl::unordered_dense::map<std::string_view, const char *> string_flags;
+        ankerl::unordered_dense::map<std::string, bool> static_flags;
+        ankerl::unordered_dense::map<std::string, const char *> string_flags;
 
         // Flags
         bool parsing_flag = false;
