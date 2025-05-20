@@ -25,6 +25,7 @@ namespace fluent::cli
     {
         STATIC,
         STRING,
+        INTEGER,
     } FlagType;
 }
 

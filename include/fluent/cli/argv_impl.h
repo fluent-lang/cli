@@ -20,6 +20,7 @@
 #define ARGV_IMPL_H
 
 #include <ankerl/unordered_dense.h>
+#include <fluent/atoi/library.h>
 #include <string>
 #include <memory>
 #include "flag/flag.h"
@@ -30,6 +31,7 @@ namespace fluent::cli
     {
         ankerl::unordered_dense::map<std::string, bool> statics;
         ankerl::unordered_dense::map<std::string, const char *> strings;
+        ankerl::unordered_dense::map<std::string, size_t> ints;
         bool success = false;
     } Argv;
 
@@ -69,9 +71,11 @@ namespace fluent::cli
         // Create a HashMap for the static & string flags
         ankerl::unordered_dense::map<std::string, bool> static_flags;
         ankerl::unordered_dense::map<std::string, const char *> string_flags;
+        ankerl::unordered_dense::map<std::string, size_t> int_flags;
 
         // Flags
         bool parsing_flag = false;
+        bool is_integer = false;
         std::string last_flag_name;
 
         // Iterate over argv
@@ -86,6 +90,27 @@ namespace fluent::cli
             {
                 // Move onto the next element
                 argv++;
+
+                // Determine if we have to parse an integer
+                if (is_integer)
+                {
+                    // Parse the argument value using fluent_libc
+                    const auto [success, value] = guided_atoi(arg);
+
+                    // Handle failure
+                    if (success == FALSE)
+                    {
+                        result->success = false;
+                        return result;
+                    }
+
+                    int_flags[last_flag_name] = value;
+                    is_integer = false;
+                    // Reset the flag
+                    last_flag_name.clear();
+                    parsing_flag = false;
+                    continue;
+                }
 
                 // Set the value in the map
                 string_flags[last_flag_name] = arg;
@@ -147,6 +172,7 @@ namespace fluent::cli
                     static_flags[last_flag_name] = true;
                 } else
                 {
+                    is_integer = flag->type == INTEGER;
                     parsing_flag = true;
                 }
 
@@ -196,6 +222,7 @@ namespace fluent::cli
         // Set the static & string flags
         result->statics = static_flags;
         result->strings = string_flags;
+        result->ints = int_flags;
 
         return result;
     }
