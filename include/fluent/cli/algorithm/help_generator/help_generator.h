@@ -51,14 +51,22 @@ namespace fluent::cli
             }
 
             // Print the flag info
-            print_padding(key.data(), 15);
-            printf("--%s", value->desc.data());
+            printf("--");
+            StringBuilder key_builder;
+            init_string_builder(&key_builder, 25);
+            write_string_builder(&key_builder, key.data());
 
             // Print shortcuts
             if (!value->shortcut.empty())
             {
-                printf(", -%s", value->shortcut.data());
+                write_string_builder(&key_builder, ", -");
+                write_string_builder(&key_builder, value->shortcut.data());
             }
+
+            print_padding(collect_string_builder_no_copy(&key_builder), 15);
+            destroy_string_builder(&key_builder);
+
+            printf("%s", value->desc.data());
 
             // Print the flag metadata
             if (value->type == STRING)
