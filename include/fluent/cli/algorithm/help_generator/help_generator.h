@@ -30,7 +30,8 @@ namespace fluent::cli
     inline void generate_help(
         const char *name,
         const char *desc,
-        const ankerl::unordered_dense::map<std::string, std::shared_ptr<Flag>>& flags
+        const ankerl::unordered_dense::map<std::string, std::shared_ptr<Flag>>& flags,
+        const size_t padding = 15
     )
     {
         // We can use the C print implementation directly, no need to use the mutexed
@@ -63,7 +64,7 @@ namespace fluent::cli
                 write_string_builder(&key_builder, value->shortcut.data());
             }
 
-            print_padding(collect_string_builder_no_copy(&key_builder), 15);
+            print_padding(collect_string_builder_no_copy(&key_builder), padding);
             destroy_string_builder(&key_builder);
 
             printf("%s", value->desc.data());
