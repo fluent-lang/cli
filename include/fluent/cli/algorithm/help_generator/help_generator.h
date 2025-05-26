@@ -53,7 +53,7 @@ namespace fluent::cli
 
             // Print the flag info
             printf("--");
-            StringBuilder key_builder;
+            string_builder_t key_builder;
             init_string_builder(&key_builder, 25);
             write_string_builder(&key_builder, key.data());
 

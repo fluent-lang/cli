@@ -34,7 +34,7 @@ inline void print_padding(const char *str, const size_t spaces)
 
     // Temporarily allocate memory to print in one pass
     // and avoid locking the mutex for every character (which is more expensive)
-    StringBuilder builder;
+    string_builder_t builder;
     init_string_builder(&builder, 10);
 
     // Use the runtime to print the string
