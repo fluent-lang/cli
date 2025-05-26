@@ -20,7 +20,7 @@
 #define ARGV_IMPL_H
 
 #include <ankerl/unordered_dense.h>
-#include <fluent/atoi/library.h>
+#include <fluent/atoi/atoi.h>
 #include <string>
 #include <memory>
 #include "flag/flag.h"

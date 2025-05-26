@@ -20,7 +20,7 @@
 #define PADDING_H
 
 #include <cstddef>
-#include <fluent/string_builder/library.h>
+#include <fluent/string_builder/string_builder.h>
 
 namespace fluent::cli
 {
