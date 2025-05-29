@@ -6,6 +6,11 @@
 
 ---
 
+> **WARNING:**
+> This library has been deprecated and is no longer maintained.
+> This decision was made due to [CLI being a built-in in fluent_libc](https://github.com/rodrigoo-r/cli).
+> We strongly advice you to use the the built-in CLI library instead.
+
 ## 👋 Welcome
 
 Welcome to the official Fluent repository! Here, you will find the source code of the Fluent Language CLI library. Have fun!
